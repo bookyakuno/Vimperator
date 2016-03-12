@@ -1,0 +1,586 @@
+3"3.8.3 (created: 2014/11/09 13:19:01)
+
+source! /Users/( ˘ω˘)/.vimperatorrc.local
+"==============================================================="
+
+" vim: set ft=vimperator:
+
+
+"==============================================================="
+"==============================================================="
+" 参考 "
+"" bmark -title="何となくVimperator2.3.1の_vimperatorrcを晒してみる | VoidRoider"
+" http://voidroider.wordpress.com/2010/11/02/142/
+"==============================================================="
+"==============================================================="
+
+
+
+
+"==============================================================="
+" ステータスバーにページタイトル表示
+"==============================================================="
+" ステータスバーにページタイトル表示
+" autocmd LocationChange .* -js statusline.updateField("title", "{" + buffer.title + "}")
+" autocmd DOMLoad .* -js args.url == buffer.URL && statusline.updateField("title", "{" + buffer.title + "}")
+set status^=title
+" ステータスバーにタブグループ名表示
+" autocmd LocationChange .* -js setTimeout(function () { statusline.updateField("tabgrouptitle", "<" + tabGroup.tabView.GroupItems.getActiveGroupItem().getTitle() + ">") }, 0);
+" set status^=tabgrouptitle
+
+"==============================================================="
+" サジェストエンジンを指定
+"==============================================================="
+" :set suggestengines=google
+
+
+"==============================================================="
+タイトルを『 』(なにもなし)に設定
+"==============================================================="
+set titlestring=
+
+
+" Evernote Clearly(アドオン前提。動作確認：10.2.1.7)
+command clearly javascript __readable_by_evernote.context_menu__call()
+map 3 :clearly
+
+
+"==============================================================="
+" アドオンインストール時の待ち時間カット
+"==============================================================="
+set! security.dialog_enable_delay=0
+
+
+
+map p :set toolbars=addons,navigation<CR> Cmd k
+
+command clearly javascript __readable_by_evernote.context_menu__call()
+noremap <C-g> :clearly<CR>
+
+
+"==============================================================="
+" ページ全体で検索語を強調表示
+"==============================================================="
+set hlsearch
+
+"==============================================================="
+" ; を ： と同じにしてタイプミスをカバー
+"==============================================================="
+map ; :
+
+
+"==============================================================="
+" アドレスバーを非表示
+"==============================================================="
+set toolbars=noaddons,nonavigation
+
+"ショートカット ※うまくいかない
+map e :set toolbars=addons,navigation<CR>
+map E :set toolbars=noaddons,nonavigation<CR>
+
+
+"==============================================================="
+" Pluginを読み込む(念のため)
+"==============================================================="
+:loadplugins
+
+
+"==============================================================="
+" デフォルトの検索エンジンをGoogleにする
+"==============================================================="
+set defsearch=g
+
+
+"==============================================================="
+" 特定のサイトで無効 gmail
+"==============================================================="
+" ignorekeys clear
+" ignorekeys add mail\\.google\\.com
+" ignorekeys add www\\.google\\.com/calendar
+
+" ignorekeys clear
+ignorekeys add https://tweetdeck.twitter.com/
+
+
+
+"==============================================================="
+" ページが読み込まれたあと、フォーカスをサイトに移す
+" "(テキストボックスにフォーカスされないようにする)
+"==============================================================="
+set focuscontent
+
+
+"==============================================================="
+"検索は大文字/小文字無視
+"==============================================================="
+set ignorecase smartcase
+
+
+"==============================================================="
+" コマンドラインを補助する()
+"==============================================================="
+set wildoptions=auto
+
+
+"==============================================================="
+" 最後に読み込み完了を表示
+"==============================================================="
+echo "###  ( ˘ω˘)読込成功したお( ◠‿◠ )  ###"
+"Finish loading vimperatorrc.
+
+"" walk-input.jsプラグインをリロード
+map <C-R> :mapc<CR>:cmapc<CR>:imapc<CR>:source ~/.vimperatorrc<CR>:source ~/.vimperator/plugin/walk-input.js<CR>
+
+
+"==============================================================="
+"表示は大文字、入力は小文字
+"==============================================================="
+"let g:hintchars="asdfjklgh"
+"let g:hintlabeling="a"
+let g:hintsio="i"
+
+
+
+
+"==============================================================="
+"==============================================================="
+"==============================================================="
+"==============================================================="
+" テーマ変更 "
+
+" UIを黒に変更
+
+
+hi Bell               display: none;
+
+" ↓これにmargin-top:40px; を入れると上に上がるけど、上がった分隠れてしまうので無理
+hi CmdLine            font-family: monospace; font-size: 16pt;
+
+
+
+hi CompResult         font-family: monospace;  overflow:hidden; max-width: 20%;
+hi CompDesc           color: LightGray; font-size: 16pt;
+
+" font-size: 0pt; でURLを非表示
+hi CompItem           font-size: 0px; color: PaleGreen;
+hi CompItem[selected] background-color: DimGray;
+hi CompTitle          color: DeepPink; font-size: 16pt;
+
+" Hints
+
+"hi Hint               font-family: monospace; font-size: 16px; font-weight: normal; color: white; background-color: rgba(0, 0, 0, 0.5); border: solid 1px LightGray;
+hi HintElem           background-color: Khaki; color: Black;
+hi HintActive         background-color: Orange; color: White;
+
+hi Keyword            color: DodgerBlue;
+hi NonText            background-color: #333;
+hi Normal             color: LightGray; background-color: #333;
+hi Question           color: LightGray; background-color: #333;
+
+" Status Line
+hi StatusLine         color: LightGray; background-color: #333; font-size: 9pt; font-family: monospace; font-weight: normal; padding: 2px 3px;
+
+hi Tag                color: Orchid;
+hi Title              color: DeepPink;
+hi URL                color: LimeGreen;
+
+" Messages
+hi Message            color: LightGray; background-color: #333; font-family: monospace; font-size: 16pt;
+hi ErrorMsg           background-color: DarkRed;
+hi InfoMsg            background-color: #333;
+hi ModeMsg            background-color: #333;
+hi MoreMsg            background-color: #333;
+hi WarningMsg         background-color: #333;
+
+"" JavaScript Objects
+hi Boolean            color: Chocolate; overflow:hidden;width; 20%;
+hi Function           color: RoyalBlue; overflow:hidden;width; 20%;
+hi Null               color: SlateGray; overflow:hidden;width; 20%;
+hi Number             color: Crimson; overflow:hidden;width; 20%;
+hi Object             color: Khaki; overflow:hidden;width; 20%;
+hi String             color: LimeGreen; overflow:hidden;width; 20%;
+
+
+
+
+" map f h
+"==============================================================="
+" f のヒントの配色変更
+"==============================================================="
+hi Hint font-family: Arial; font-size: 21px; font-weight: bold; text-shadow: -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black, 1px 1px 2px black; color: #33cccc; text-transform: uppercase; padding-left:25px;
+"一番後ろのtext-transform: uppercase;で、fのヒントを 大文字にする(検索方法がアルファベットの時、大文字表示で個文字入力したい時使う)
+hi HintElem color: #000000; background-color: #a1e4e6;
+hi HintActive color: black; background-color: #ff8700;
+
+
+
+
+
+
+"==============================================================="
+"==============================================================="
+"==============================================================="
+"==============================================================="
+" プラグイン "
+
+
+"==============================================================="
+"" char-hints-mod2.js
+"==============================================================="
+"let g:hintsio="iO"  "ヒント表示時は大文字で、押すときは小文字
+"let g:hintchars="JKLASDFHGUIONMERWC"
+
+set hintchars=rfasdwe
+
+""  参考…… Vimperator 3のヒントモードでアルファベットを使う - アインシュタインの電話番号
+""  http://blog.ruedap.com/2011/03/27/vimperator3-hint-mode-alphabet-uppercase
+
+
+
+
+"==============================================================="
+" Twitterクライアント化 "
+"==============================================================="
+
+" Twitterへの接続がSSLのみになったので、Twittperator側でもSSLを使うように
+"let g:twittperator_use_ssl_connection_for_api_ep = 1
+
+" Streaming APIを使う
+"let g:twittperator_use_chirp = 1
+
+" 特定の単語を含むツイートを追いかける
+"let g:twittperator_track_words = "vimp,vimperator,twittperator,ついっぺ,ツイッペ"
+
+" Twitter IDの設定。いくつかのプラグインで必要
+"let g:twittperator_screen_name = "ebith"
+
+" タイムラインの表示
+"nnoremap ,wl :tw<CR>
+
+" ツイートする
+"nnoremap ss :tw<Space>
+
+
+" 返信する
+"nnoremap ,wr :tw<Space>@
+
+" ツイートに含まれるURLを開く
+"nnoremap ,w/ :tw!/<Tab>
+
+" 会話を辿る
+"nnoremap ,wt :tw!thread<Space>
+
+
+
+
+
+
+
+
+
+
+
+
+
+"==============================================================="
+" ニコニコ動画 "
+"==============================================================="
+
+" /lang/javascript/vimperator-plugins/trunk/nicontroller.js – CodeRepos::Share – Trac
+"      3http://webcache.googleusercontent.com/search?q=cache:3TkFZQKByBgJ:coderepos.org/share/browser/lang/javascript/vimperator-plugins/trunk/nicontroller.js%3Frev%3D24182+&cd=1&hl=ja&ct=clnk&gl=jp&client=firefox-a
+
+
+"ニコニコ動画
+"ニコニコ動画では指定したキー以外は無効
+ignorekeys add mail\\.google\\.com -except b,o,:
+
+
+"   コメント表示 / 非表示を切り替える。
+"    :nicommentvisible
+
+"map 4 :nicommentvisible<CR>
+"map 5 :nicosize<CR>
+"       最大化 / ノーマルを切り替える。
+
+
+"    :nicomment comment
+"       コメント欄を指定した文字列で埋める。
+
+
+
+
+"==============================================================="
+" YouTube "
+"==============================================================="
+
+" 現在の位置から delta 分離れた所にシークする。秒数で指定が可能。マイナスを指定すると戻る。指定なしの場合変化しない。
+"使ってない
+"map <M-S-Up> :ytseek! 60
+"map <M-S-Down> :ytseek! -60
+
+
+
+
+
+"==============================================================="
+" copy.js "
+"==============================================================="
+
+" https://github.com/oflow/vimperator-plugins/blob/master/copy.js
+javascript <<EOM
+// この2つしか使わない
+liberator.globalVariables.copy_templates = [
+{label: 'titleAndURL', value: '"%TITLE%" %URL%'},
+{label: 'URL',         value: '%URL%'}
+];
+EOM
+" -- /copy.js --
+
+
+"==============================================================="============
+" Vimperatorでcopy.jsプラグインを使い始めた。 | CreativeStyle    http://kadoppe.com/archives/2013/08/vimperator-copy-js.html
+
+" タイトルとURLをコピー
+map <S-c> :copy titleAndURL<CR><q>
+" map y :copy URL<CR><q>
+map 6 y
+map 5 :copy titleAndURL<CR><q>
+
+
+
+
+"==============================================================="
+" ファビコン表示 "
+"==============================================================="
+
+"js <<EOM
+"  liberator.globalVariables.migrate_elements = [
+"    {
+"      id:    'feed-button',
+"      dest:  'security-button',
+"      after: true,
+"    },
+"    {
+"      id:    'page-proxy-favicon',
+"      dest:  'liberator-statusline',
+"      after: false,
+"    },
+"    {
+"      id:    'back-button',
+"      dest:  'panel-page-proxy-favicon',
+"      after: false,
+"      label: '<',
+"    },
+"    {
+"      id:    'forward-button',
+"      dest:  'panel-page-proxy-favicon',
+"      after: false,
+"      label: '>',
+"    },
+"  ];
+"EOM
+"
+"style -name historyNavigator chrome://browser/content/browser.xul <<EOM
+"  #back-button, #forward-button {
+"    -moz-appearance:  none !important;
+"    list-style-image: none !important;
+"  }
+"EOM
+
+
+
+"==============================================================="
+"==============================================================="
+"==============================================================="
+"==============================================================="
+
+" キーマップ "
+
+
+
+"==============================================================="
+" サジェストエンジンの使用 "
+"==============================================================="
+
+" map o :open g
+" map t :tabopen g
+
+" map 5 gi
+
+
+
+":[tab]open時の補完設定
+"s=検索エンジン+キーワードURL
+"S=サジェストエンジン
+"l=ロケーションバーの補完機能を利用
+"b=ブックマーク
+
+set complete=sl
+
+
+"==============================================================="
+"デフォルト検索エンジン(検索バーの管理→キーワードでgoogleをgに変更しておく)
+"==============================================================="
+set defsearch=g
+
+"==============================================================="
+"コマンド入力時にコマンド名を自動補完
+"==============================================================="
+set wildoptions=auto
+
+
+
+
+" nmap ノーマルモード
+" imap インサートモード
+" vmap ビジュアルモード
+" cmap コマンドモード
+" omap オペレータ待機モード
+" mapでなくnoremap使う
+
+
+"＜CR＞　---　命令終了もしくはEnterと同じ意味。
+"＜BS＞　---　backspace
+"＜S-なにか＞　---　Shift + なにか
+"＜C-なにか＞　---　Ctrl + なにか
+"＜A-なにか＞　---　Alt + なにか
+
+"【そのほか】
+"矢印類　　　---　＜Left＞＜Right＞＜Up＞＜Down＞
+"ページ上下　---　＜PageUp＞＜PageDown＞
+"エスケープ　---　＜Esc＞
+"キャップロック　 ＜CapsLock＞
+"ナムロック　---　＜NumLock＞
+"デリート　　---　＜Del＞
+"タブキー　　---　＜Tab＞
+"インサート　---　＜Ins＞
+"スペース　　---　＜Space＞
+"==============================================================="
+"==============================================================="
+
+
+
+
+
+
+"==============================================================="
+
+"新規タブ
+"==============================================================="
+map 4 :tabopen<CR>
+
+
+
+"==============================================================="
+" commandモードでIMEオフ
+" ※Macでは不可( ◠‿◠ )
+"style! -name=commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
+"==============================================================="
+
+
+
+
+
+
+
+
+
+
+"==============================================================="
+" Evernote Clearly アドオンを実行
+"==============================================================="
+" nnoremap E :<C-u>js __readable_by_evernote.__readable_by_evernote__launch(false)<CR>
+
+" Evernote Clearly
+"nnoremap e :<C-u>js __readable_by_evernote.__readable_by_evernote__launch(false)<CR>
+"nnoremap E :<C-u>js __readable_by_evernote.__readable_by_evernote__launch(true)<CR>
+
+map hu  :clearly<CR>
+
+map g gi
+
+" Adblockでサイドバーを非表示
+" bunkei-programmer.net###sidebar
+
+
+
+"==============================================================="
+" ブックマークに追加するのを無効
+"==============================================================="
+
+map a <NOP>
+
+"==============================================================="
+" タブ切り替え
+"==============================================================="
+
+map u gT
+map i gt
+
+map q gT
+map w gt
+
+
+noremap ZZ <NOP>
+
+
+"==============================================================="
+" 戻る・進む
+"==============================================================="
+map b :back <CR>
+map . :forward <CR>
+
+
+
+"==============================================================="
+" ブックマーク → 2
+"==============================================================="
+"map q :bmarks
+
+
+"==============================================================="
+" 履歴 → 3
+"==============================================================="
+"map w :history
+
+
+"==============================================================="
+" バックスペースで戻るを無効
+"==============================================================="
+noremap <BS> <NOP>
+
+
+"==============================================================="
+" r で再読み込みを無効
+map <r>  nop
+
+
+"==============================================================="
+" タブを閉じる
+map _ d
+map , d
+
+
+"==============================================================="
+" j,kによる上下スクロールの移動量を5倍に設定
+"==============================================================="
+map j 5<C-e>
+map k 5<C-y>
+
+
+"==============================================================="
+" ページアップ、ダウン
+"==============================================================="
+map n <PageDown>
+map m <PageUp>
+
+map a <PageDown>
+map s <PageUp>
+
+
+map g <A-d>
+
+"==============================================================="
+" 0で _vimperatorrcを再読み込み
+"==============================================================="
+map 0 :source ~/.vimperatorrc<CR>
